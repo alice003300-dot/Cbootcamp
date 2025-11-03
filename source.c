@@ -99,4 +99,102 @@ int main(void) {
     return 0;
 }
 
+//DAY3 HW1
+#include <stdio.h>
+
+int main(void) {
+    int x, max = -1, idx = -1;
+
+    for (int i = 1; i <= 9; i++) {
+        if (scanf("%d", &x) != 1) return 0;  // 입력 실패 방지
+        if (x > max) {
+            max = x;
+            idx = i;  // 1-based 위치
+        }
+    }
+
+    printf("%d\n%d\n", max, idx);
+    return 0;
+}
+
+
+//DAY3 HW2
+#include <stdio.h>
+
+int main(void) {
+    int x, max = -1, idx = -1;
+
+    for (int i = 1; i <= 9; i++) {
+        if (scanf("%d", &x) != 1) return 0;  // 입력 실패 방지
+        if (x > max) {
+            max = x;
+            idx = i;  // 1-based 위치
+        }
+    }
+
+    printf("%d\n%d\n", max, idx);
+    return 0;
+}
+
+
+//DAY3 HW3
+#include <stdio.h>
+
+int main(void) {
+    int T;
+    if (scanf("%d", &T) != 1) return 0;
+
+    while (T--) {
+        int R;
+        char S[21];                 // S 길이 ≤ 20
+        if (scanf("%d %20s", &R, S) != 2) return 0;
+
+        for (int i = 0; S[i] != '\0'; i++) {
+            for (int k = 0; k < R; k++) {
+                putchar(S[i]);
+            }
+        }
+        putchar('\n');
+    }
+    return 0;
+}
+
+
+//DAY3 HW4
+#include <stdio.h>
+
+int main(void) {
+    int N, M;
+    if (scanf("%d %d", &N, &M) != 2) return 0;
+
+    int A[100][100];
+
+    // 행렬 A 입력
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            scanf("%d", &A[i][j]);
+        }
+    }
+
+    // 행렬 B 입력받으며 바로 더하기
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            int x;
+            scanf("%d", &x);
+            A[i][j] += x;
+        }
+    }
+
+    // 결과 출력
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            if (j) putchar(' ');
+            printf("%d", A[i][j]);
+        }
+        putchar('\n');
+    }
+    return 0;
+}
+
+
 
