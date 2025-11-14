@@ -196,5 +196,295 @@ int main(void) {
     return 0;
 }
 
+//DAY4 HW1
+#include <stdio.h>
+
+int main(void) {
+    int num;
+    int max = -1;     
+    int maxRow = 1;
+    int maxCol = 1;
+
+    for (int i = 1; i <= 9; i++) {        
+        for (int j = 1; j <= 9; j++) {    
+            scanf("%d", &num);
+
+            if (num > max) {              
+                max = num;
+                maxRow = i;
+                maxCol = j;
+            }
+        }
+    }
+
+    printf("%d\n", max);
+    printf("%d %d\n", maxRow, maxCol);
+
+    return 0;
+}
+
+
+//DAY4 HW2
+#include <stdio.h>
+
+int main(void) {
+    int x1, y1;
+    int x2, y2;
+    int x3, y3;
+    int x4, y4;
+
+    scanf("%d %d", &x1, &y1);
+    scanf("%d %d", &x2, &y2);
+    scanf("%d %d", &x3, &y3);
+
+   
+    if (x1 == x2) x4 = x3;
+    else if (x1 == x3) x4 = x2;
+    else x4 = x1;
+
+  
+    if (y1 == y2) y4 = y3;
+    else if (y1 == y3) y4 = y2;
+    else y4 = y1;
+
+    printf("%d %d\n", x4, y4);
+
+    return 0;
+}
+
+//DAY4 HW3
+#include <stdio.h>
+
+int main(void) {
+    int N;
+    int w[50], h[50];   
+    int rank[50];
+
+    scanf("%d", &N);
+
+    for (int i = 0; i < N; i++) {
+        scanf("%d %d", &w[i], &h[i]);
+        rank[i] = 1;   
+    }
+
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            if (i == j) continue;
+
+            if (w[j] > w[i] && h[j] > h[i]) {
+                rank[i]++;
+            }
+        }
+    }
+
+    for (int i = 0; i < N; i++) {
+        printf("%d", rank[i]);
+        if (i != N - 1) printf(" ");
+    }
+    printf("\n");
+
+    return 0;
+}
+
+//DAY5 HW1
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main() {
+    FILE* fp = fopen("data.txt", "wt");
+    if (fp == NULL) {
+        printf("Failed to open file");
+        return -1;
+    }
+
+    fputc('A', fp);
+    fputc('B', fp);
+    fputc('C', fp);
+
+    fclose(fp);
+    return 0;
+}
+
+
+//DAY5 HW2
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main() {
+    char ch;
+
+    FILE* fp = fopen("C:/KHS_Code/C_VS2022/ch5/ex1/data.txt", "rt");
+    if (fp == NULL) {
+        printf("Failed to open file");
+        return -1;
+    }
+
+    for (int i = 0; i < 3; i++) {
+        ch = fgetc(fp);
+        printf("%c\n", ch);
+    }
+
+    fclose(fp);
+    return 0;
+}
+
+
+//DAY5 HW3
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main() {
+    FILE* org = fopen("input.txt", "rt");
+    FILE* copy = fopen("output.txt", "wt");
+    char str[20];
+
+    if (org == NULL || copy == NULL) {
+        printf("Failed to open file");
+        return -1;
+    }
+
+    while (fgets(str, sizeof(str), org) != NULL) {
+        fputs(str, copy);
+    }
+
+    if (feof(org) != 0)
+        printf("File copied successfully");
+    else
+        printf("Failed to copy file");
+
+    fclose(org);
+    fclose(copy);
+
+    return 0;
+}
+
+
+//DAY5 HW4
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+    char name[10];
+    int age;
+
+    FILE* fp = fopen("student.txt", "wt");
+
+    for (int i = 0; i < 3; i++)
+    {
+        printf("다음 순서로 입력 (name age): ");
+        scanf("%s %d", name, &age);
+        getchar();
+        fprintf(fp, "%s %d\n", name, age);
+    }
+
+    fclose(fp);
+    return 0;
+}
+
+
+//DAY5 HW5
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+    int* ptr1 = (int*)malloc(sizeof(int));
+    int* ptr2 = (int*)malloc(sizeof(int) * 3);
+
+    *ptr1 = 20;
+
+    for (int i = 0; i < 3; i++)
+        ptr2[i] = i;
+
+    printf("%d\n", *ptr1);
+    for (int i = 0; i < 3; i++)
+        printf("%d ", ptr2[i]);
+
+    free(ptr1);
+    free(ptr2);
+
+    return 0;
+}
+
+//DAY6 HW1
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    int N;
+    int stack[10000];
+    int top = -1;
+    char cmd[10];
+    int x;
+
+    scanf("%d", &N);
+
+    for (int i = 0; i < N; i++) {
+        scanf("%s", cmd);
+
+        if (strcmp(cmd, "push") == 0) {
+            scanf("%d", &x);
+            stack[++top] = x;
+        }
+        else if (strcmp(cmd, "pop") == 0) {
+            if (top == -1) printf("-1\n");
+            else printf("%d\n", stack[top--]);
+        }
+        else if (strcmp(cmd, "size") == 0) {
+            printf("%d\n", top + 1);
+        }
+        else if (strcmp(cmd, "empty") == 0) {
+            printf("%d\n", top == -1 ? 1 : 0);
+        }
+        else if (strcmp(cmd, "top") == 0) {
+            if (top == -1) printf("-1\n");
+            else printf("%d\n", stack[top]);
+        }
+    }
+
+    return 0;
+}
+
+
+//DAY6 HW2
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    int N;
+    int queue[10000];
+    int front = 0, back = 0;
+    char cmd[10];
+    int x;
+
+    scanf("%d", &N);
+
+    for (int i = 0; i < N; i++) {
+        scanf("%s", cmd);
+
+        if (strcmp(cmd, "push") == 0) {
+            scanf("%d", &x);
+            queue[back++] = x;
+        }
+        else if (strcmp(cmd, "pop") == 0) {
+            if (front == back) printf("-1\n");
+            else printf("%d\n", queue[front++]);
+        }
+        else if (strcmp(cmd, "size") == 0) {
+            printf("%d\n", back - front);
+        }
+        else if (strcmp(cmd, "empty") == 0) {
+            printf("%d\n", front == back ? 1 : 0);
+        }
+        else if (strcmp(cmd, "front") == 0) {
+            if (front == back) printf("-1\n");
+            else printf("%d\n", queue[front]);
+        }
+        else if (strcmp(cmd, "back") == 0) {
+            if (front == back) printf("-1\
 
 
